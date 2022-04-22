@@ -3,17 +3,15 @@
 - 处理路由
 - 代码组织
 - 文件结构
-- API调用
+- API 调用
 
-> Expressjs Koajs 
+> Expressjs Koajs
 
 过高的灵活性是双刃剑，意味着很多功能需要开发者去组合。
 
+## 初识 NestJS
 
-
-## 初识NestJS
-
-NestJS 通过创建抽象或整体 让开发者专注于 程序本身，而不是如何设置typescript，api路由，错误处理，中间件等。
+NestJS 通过创建抽象或整体 让开发者专注于 程序本身，而不是如何设置 typescript，api 路由，错误处理，中间件等。
 
 - 开箱即用
 - 可测试，可扩展
@@ -21,17 +19,15 @@ NestJS 通过创建抽象或整体 让开发者专注于 程序本身，而不�
 - 模块化结构，保持代码井井有条，建立清晰的边界
 - 架构遵循 SOLID 原则
 
-不局限于某一个框架，利用社区中现成的选项和模块，例如express中的，fastify等等。
+不局限于某一个框架，利用社区中现成的选项和模块，例如 express 中的，fastify 等等。
 
-（如果要使用fastify，需要在应用程序中使用不同的fastify兼容库。）
+（如果要使用 fastify，需要在应用程序中使用不同的 fastify 兼容库。）
 
-Nest在此提供的灵活性使我们能搞创建于平台无关的模块，这些模块不仅与esxpress或f等http框架无关，甚至于不同类型的应用程序无关。
+Nest 在此提供的灵活性使我们能搞创建于平台无关的模块，这些模块不仅与 esxpress 或 f 等 http 框架无关，甚至于不同类型的应用程序无关。
 
-Nest可用于构建RestAPI、MVC应用程序、微服务、GraphQL应用、Web sockets、CLI
+Nest 可用于构建 RestAPI、MVC 应用程序、微服务、GraphQL 应用、Web sockets、CLI
 
 因为依赖注入，可以毫不费力更换底层机制
-
-
 
 ## 开始
 
@@ -48,8 +44,6 @@ cd projectName
 npm run start
 
 ```
-
-
 
 ### 结构
 
@@ -68,15 +62,11 @@ src     # 代码存放
     common # 公用
 ```
 
-
-
 ### 装饰器
 
 装饰器可以作用于类，方法，属性甚至参数
 
-Nest为所有常见的HTTP动词提供了装饰器，全都包含在@nestjs/common这个包中
-
-
+Nest 为所有常见的 HTTP 动词提供了装饰器，全都包含在@nestjs/common 这个包中
 
 ## 控制器
 
@@ -98,17 +88,13 @@ nest g co module/abc
 nest g co module/abc --dry-run
 ```
 
-
-
 ### 指定路由
 
-`@Controller`可以接收一个字符串，该字符串传递Nest创建路由映射所需的元数据，将传入的请求绑定到这个控制器上
+`@Controller`可以接收一个字符串，该字符串传递 Nest 创建路由映射所需的元数据，将传入的请求绑定到这个控制器上
 
 ```typescript
 @Controller('/test')
 ```
-
-
 
 ### 处理请求
 
@@ -116,20 +102,16 @@ nest g co module/abc --dry-run
 export class CoffeesController {
   @Get()
   findAll() {
-    return 'This action resutrns all coffess';
+    return "This action resutrns all coffess";
   }
 }
 ```
 
-
-
-### 嵌套URL
+### 嵌套 URL
 
 ```typescript
 @Get('flavors')
 ```
-
-
 
 ### 动态数据
 
@@ -147,8 +129,6 @@ findOne(@Param('id') id:string) {
 }
 ```
 
-
-
 ### 查询参数
 
 ```typescript
@@ -158,10 +138,6 @@ findAll(@Query() paginationQuery) {
     return `limit:${limit} offset:${offset}`;
 }
 ```
-
-
-
-
 
 ### Payload
 
@@ -178,11 +154,9 @@ create(@Body('name') name: string) {
 }
 ```
 
-
-
 ### 静态状态码
 
-默认如果请求成功，自动发回状态码： 
+默认如果请求成功，自动发回状态码：
 
 - 200 - GET
 - 201 - POST
@@ -197,17 +171,15 @@ create(@Body() body) {
 }
 ```
 
-> Nest内置了枚举类型HttpStatus用来表示HttpCode的所有类型
-
-
+> Nest 内置了枚举类型 HttpStatus 用来表示 HttpCode 的所有类型
 
 ### 使用底层库方法
 
 **@Res**
 
-来自Express的方法，获取response对象，不过这种使用失去了依赖于Nest标准响应处理的Nest功能的兼容性，比如拦截器和@HttpCode()装饰器。使用底层库的方式不便于测试，因为我们必须mock response对象。
+来自 Express 的方法，获取 response 对象，不过这种使用失去了依赖于 Nest 标准响应处理的 Nest 功能的兼容性，比如拦截器和@HttpCode()装饰器。使用底层库的方式不便于测试，因为我们必须 mock response 对象。
 
-> 建议： 尽可能使用Nest的方法
+> 建议： 尽可能使用 Nest 的方法
 
 ```typescript
 @Get()
@@ -215,8 +187,6 @@ findAll(@Res() res) {
     res.status(200).send('Hello World!');
 }
 ```
-
-
 
 ### 修改和删除
 
@@ -232,15 +202,13 @@ remove(@Param('id') id: string) {
 }
 ```
 
-
-
 ## 服务
 
 一般负责数据存储和检索，为对应控制器提供一些全局的功能
 
-每一个Service都是一个provider，意思是它可以注入依赖
+每一个 Service 都是一个 provider，意思是它可以注入依赖
 
-如此对象之间可以创建各种关系，并且将对象实例连接在一起的逻辑都可以由NEST运行时系统处理，而不是自己创建和管理这种类型的依赖注入
+如此对象之间可以创建各种关系，并且将对象实例连接在一起的逻辑都可以由 NEST 运行时系统处理，而不是自己创建和管理这种类型的依赖注入
 
 ```bash
 nest g s
@@ -249,18 +217,18 @@ nest generate service
 
 ```typescript
 // coffees.service.ts
-import { Injectable } from '@nestjs/common';
-import { Coffee } from './entities/coffee.entity';
+import { Injectable } from "@nestjs/common";
+import { Coffee } from "./entities/coffee.entity";
 
 @Injectable()
 export class CoffeesService {
   private coffees: Coffee[] = [
     {
       id: 1,
-      name: 'Cappuccino',
+      name: "Cappuccino",
       price: 6.99,
       description:
-        'A cappuccino is an espresso-based coffee drink, made by diluting an espresso with hot water, giving it a similar strength to, but different flavor from, traditionally brewed coffee.',
+        "A cappuccino is an espresso-based coffee drink, made by diluting an espresso with hot water, giving it a similar strength to, but different flavor from, traditionally brewed coffee.",
     },
   ];
 
@@ -290,12 +258,11 @@ export class CoffeesService {
     return deletedCoffee;
   }
 }
-
 ```
 
 ```typescript
 // Nest将通过创建CoffeesService实例并将其返回给CoffeesController来解析CoffeesService
-import { CoffeesService } from './coffees.service';
+import { CoffeesService } from "./coffees.service";
 import {
   Body,
   Controller,
@@ -308,9 +275,9 @@ import {
   Post,
   Query,
   Res,
-} from '@nestjs/common';
+} from "@nestjs/common";
 
-@Controller('coffees')
+@Controller("coffees")
 export class CoffeesController {
   constructor(private readonly coffeesService: CoffeesService) {}
 
@@ -321,8 +288,8 @@ export class CoffeesController {
   }
 
   // 接收指定参数
-  @Get(':id')
-  findOne(@Param('id') id: string) {
+  @Get(":id")
+  findOne(@Param("id") id: string) {
     return this.coffeesService.findOne(id);
   }
 
@@ -331,20 +298,17 @@ export class CoffeesController {
     return this.coffeesService.create(body);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() body) {
+  @Patch(":id")
+  update(@Param("id") id: string, @Body() body) {
     return this.coffeesService.update(id, body);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
+  @Delete(":id")
+  remove(@Param("id") id: string) {
     return this.coffeesService.delete(id);
   }
 }
-
 ```
-
-
 
 ### 错误处理
 
@@ -352,44 +316,38 @@ export class CoffeesController {
 - 响应错误对象
 - 创建拦截器利用异常过滤器
 
-
-
 ```typescript
 findOne(id: string): Coffee {
     const coffee = this.coffees.find((coffee) => coffee.id === id);
     if (!coffee) {
         throw new HttpException('Coffee not found', HttpStatus.NOT_FOUND);
-        
+
         throw new NotFoundException(`Coffee with id "${id}" not found`);
     }
     return coffee;
 }
 ```
 
-
-
-
-
 ## 模块
 
-组织特定功能模块相关的代码，建立清晰地便捷，SOLID原则
+组织特定功能模块相关的代码，建立清晰地便捷，SOLID 原则
 
 - controllers：模块实例化的根
 - exports：可以列出该模块对外暴露的成员
-- imports：引入其他的providers
-- providers：需要由Nest注入器实例化的服务，此处的providers只在模块内部可用，除非添加到exports中
+- imports：引入其他的 providers
+- providers：需要由 Nest 注入器实例化的服务，此处的 providers 只在模块内部可用，除非添加到 exports 中
 
 ```typescript
 // 生成一个module文件，并在app中引入
 nest g module moduleName
 
-// coffees.module.ts    
+// coffees.module.ts
 @Module({
     controllers: [CoffeesController],
     providers: [CoffeesService],
 })
 export class CoffeesModule {}
-    
+
 // app.module.ts
 @Module({
   imports: [CoffeesModule],
@@ -399,8 +357,6 @@ export class CoffeesModule {}
 export class AppModule {}
 
 ```
-
-
 
 ## DTO
 
@@ -442,11 +398,9 @@ update(@Param('id') id: string, updateCoffeeDto: UpdateCoffeeDto) {
 }
 ```
 
-
-
 ### 输入验证
 
-`validationPipe` 提供了可以对传入的有效payload强制执行验证规则的便捷方式，只通过在dto简单的注释就能指定这些规则
+`validationPipe` 提供了可以对传入的有效 payload 强制执行验证规则的便捷方式，只通过在 dto 简单的注释就能指定这些规则
 
 如果请求中的属性类型错误，会自动响应 400 BadRequest，同时返回错误细节
 
@@ -474,9 +428,7 @@ export class CreateCoffeeDto {
 }
 ```
 
-
-
-### 简化Dto代码
+### 简化 Dto 代码
 
 在上例中，create dto 和 update dto 有过多重复代码
 
@@ -493,9 +445,7 @@ import { CreateCoffeeDto } from './create-coffee.dto';
 export class UpdateCoffeeDto extends PartialType(CreateCoffeeDto) {}
 ```
 
-
-
-### ValidationPipe其他功能
+### ValidationPipe 其他功能
 
 #### **白名单**
 
@@ -504,43 +454,37 @@ export class UpdateCoffeeDto extends PartialType(CreateCoffeeDto) {}
 ```typescript
 // 修改main.ts
 app.useGlobalPipes(
-	new ValidationPipe({
-		whitelist: true,
-	}),
+  new ValidationPipe({
+    whitelist: true,
+  })
 );
 
 // 这样就只会获取dto约定的属性
 // 而如果设置
-forbidNonWhitelisted: true
+forbidNonWhitelisted: true;
 // 则会在不匹配dto时响应400
 ```
 
-
-
 #### Transform
 
-接受到的payload并不属于dto的实例
+接受到的 payload 并不属于 dto 的实例
 
 ```typescript
 console.log(createCoffeeDto instanceof CreateCoffeeDto); //false
 ```
 
-而ValidationPipe可以帮我们将这个对象转化为我们所期望的
+而 ValidationPipe 可以帮我们将这个对象转化为我们所期望的
 
 ```typescript
 // main.ts设置
-transform: true
+transform: true;
 
 console.log(createCoffeeDto instanceof CreateCoffeeDto); //true
 ```
 
-
-
-
-
 ## 数据库
 
-选用postgres
+选用 postgres
 
 ### 初始化
 
@@ -553,7 +497,7 @@ npm i @nestjs/typeorm typeorm pg
 // app.module.ts 的imports里配置如下： 主模块用forRoot，子模块用forFeature
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: '101.35.103.3',
+      host: 'xxx',
       port: 5432,
       username: 'postgres',
       password: '123456',
@@ -563,11 +507,9 @@ npm i @nestjs/typeorm typeorm pg
     }),
 ```
 
-
-
 ### TypeORM
 
-每个Entity类代表一张数据库表，默认情况下，TypeORM会根据我们的小写类名来命名SQL表。
+每个 Entity 类代表一张数据库表，默认情况下，TypeORM 会根据我们的小写类名来命名 SQL 表。
 
 如果想使用不同的表名，可以传参给@Entity()指定。
 
@@ -580,7 +522,7 @@ npm i @nestjs/typeorm typeorm pg
 定义普通列，使用列装饰器注释的每个属性都会映射到表的列。
 
 ```typescript
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity() // sql table === "coffee"
 export class Coffee {
@@ -593,14 +535,12 @@ export class Coffee {
   @Column()
   price: number;
 
-  @Column('json', { nullable: true })  // 可空
+  @Column("json", { nullable: true }) // 可空
   flavors: string[];
 }
 ```
 
-
-
-#### **注册TypeORM**
+#### **注册 TypeORM**
 
 ```typescript
 // coffees.module.ts
@@ -613,15 +553,13 @@ export class Coffee {
 // 此时数据库已经生成了coffee表
 ```
 
-
-
 ##### **Repository**
 
 是数据的抽象，并提供了很多与数据库交互的方法
 
 **@InjectRepository**
 
-可以将自动生成的存储库注入到service
+可以将自动生成的存储库注入到 service
 
 **CRUD**
 
@@ -631,18 +569,18 @@ import {
   HttpStatus,
   Injectable,
   NotFoundException,
-} from '@nestjs/common';
-import { Coffee } from './entities/coffee.entity';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { CreateCoffeeDto } from './dto/create-coffee.dto';
-import { UpdateCoffeeDto } from './dto/update-coffee.dto';
+} from "@nestjs/common";
+import { Coffee } from "./entities/coffee.entity";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
+import { CreateCoffeeDto } from "./dto/create-coffee.dto";
+import { UpdateCoffeeDto } from "./dto/update-coffee.dto";
 
 @Injectable()
 export class CoffeesService {
   constructor(
     @InjectRepository(Coffee)
-    private readonly coffeeRepository: Repository<Coffee>,
+    private readonly coffeeRepository: Repository<Coffee>
   ) {}
 
   findAll() {
@@ -678,10 +616,7 @@ export class CoffeesService {
     return this.coffeeRepository.remove(coffee);
   }
 }
-
 ```
-
-
 
 ### 关系
 
@@ -696,18 +631,14 @@ flavors: Flavor[];
 // coffees.service 中注入Flavor
 @InjectRepository(Flavor)
 private readonly flaverRepository: Repository<Flavor>
-    
+
 // coffees.module 中引入Flavor
 imports: [TypeOrmModule.forFeature([Coffee, Flavor])],
 ```
 
-
-
-
-
 ### 分页
 
-不属于任何一个业务模块的功能放在common以便复用
+不属于任何一个业务模块的功能放在 common 以便复用
 
 ```typescript
 nest g class common/dto/pagination-query.dto --no-spec
@@ -739,10 +670,6 @@ findAll(paginationQueryDto: PaginationQueryDto) {
     });
 }
 ```
-
-
-
-
 
 ### 事务
 
@@ -799,70 +726,50 @@ async recommendCoffee(coffee: Coffee) {
 }
 ```
 
-
-
-
-
 ### 索引
 
 `@Index() ` 用于单列
 
-`@Index(['name','type'])`  用于实体
-
-
-
-
+`@Index(['name','type'])` 用于实体
 
 ## 依赖注入
 
 依赖反转原则：
 
 1. 高层模块不应直接依赖于底层模块，高层和底层都应该依赖于抽象(interface)
-2. 抽象不应该依赖于具体的类方法，类方法应该依赖于interface
+2. 抽象不应该依赖于具体的类方法，类方法应该依赖于 interface
 
+**Nest 中依赖注入的三步骤：**
 
+- 在 service 中使用@Injectable 声明一个可以被**Nest 反转控制容器**管理的类，将该类标记为“提供者”
 
-**Nest中依赖注入的三步骤：**
-
-- 在service中使用@Injectable声明一个可以被**Nest反转控制容器**管理的类，将该类标记为“提供者”
-
-- controller 的 constructor 中 请求 service，这个请求告诉Nest将提供“注入”到controller，以便我们可以使用它。
+- controller 的 constructor 中 请求 service，这个请求告诉 Nest 将提供“注入”到 controller，以便我们可以使用它。
 
   ```typescript
   constructor(private readonly coffeesService: CoffeesService) {}
   ```
 
-- module 在providers中列出了service，所以它向**Nest反转控制容器**注册了这个提供者。
+- module 在 providers 中列出了 service，所以它向**Nest 反转控制容器**注册了这个提供者。
 
-
-
-> 当Nest容器实例化controller时，会先看是否有依赖项，当找到依赖项service，会对service执行查找，返回service类，然后service创建service实例，将其缓存并返回，如果已经被缓存，就返回那个实例
+> 当 Nest 容器实例化 controller 时，会先看是否有依赖项，当找到依赖项 service，会对 service 执行查找，返回 service 类，然后 service 创建 service 实例，将其缓存并返回，如果已经被缓存，就返回那个实例
 
 ![image-20220421005345704](http://rafs7sum2.hb-bkt.clouddn.com/note-images/image-20220421005345704.png)
 
-
-
-实际上module中providers完整写法：
+实际上 module 中 providers 完整写法：
 
 ```typescript
 // 将二者对应起来
 providers: [
-    {
-        provide: CoffeeService,  // 实例的token
-        useClass: CoffeeService, // 实例的类
-    }
-]
+  {
+    provide: CoffeeService, // 实例的token
+    useClass: CoffeeService, // 实例的类
+  },
+];
 ```
-
-
 
 ## 封装
 
-**exports:**可以看做是一个模块的公共接口，或API
-
-
-
-
+**exports:**可以看做是一个模块的公共接口，或 API
 
 ## 自定义
 
@@ -877,9 +784,7 @@ class MockCoffeeService {}
 })
 ```
 
-这样每次CoffeesService TOKEN被解析时，它将指向新的MockCoffeesService
-
-
+这样每次 CoffeesService TOKEN 被解析时，它将指向新的 MockCoffeesService
 
 ### Provider token
 
@@ -887,7 +792,7 @@ class MockCoffeeService {}
 
 :chestnut:
 
-> @Inject 告诉IoC控制反转容器 在实例化时 要依赖的类
+> @Inject 告诉 IoC 控制反转容器 在实例化时 要依赖的类
 
 ```typescript
 // coffees.constants.ts
@@ -913,13 +818,11 @@ export class CoffeesService {
 ...
 ```
 
-
-
 ### useClass
 
-允许们动态确定一个Token应该解析到的Class
+允许们动态确定一个 Token 应该解析到的 Class
 
-> :chestnut:我们有一个默认的ConfigService类，根据当前环境为每个ConfigService提供不同的实现
+> :chestnut:我们有一个默认的 ConfigService 类，根据当前环境为每个 ConfigService 提供不同的实现
 
 ```typescript
 class ConfigService {}
@@ -928,25 +831,23 @@ class ProductionConfigService {}
 
 // coffees.module.ts
 providers: [
-    { provide: COFFEE_BRANDS, useValue: ['Philips', 'Bosch'] },
-    CoffeesService,
-    {
-      provide: ConfigService,
-      useClass:
-        process.env.NODE_ENV === 'development'
-          ? DevelopmentConfigService
-          : ProductionConfigService,
-    },
-]
+  { provide: COFFEE_BRANDS, useValue: ["Philips", "Bosch"] },
+  CoffeesService,
+  {
+    provide: ConfigService,
+    useClass:
+      process.env.NODE_ENV === "development"
+        ? DevelopmentConfigService
+        : ProductionConfigService,
+  },
+];
 ```
-
-
 
 ### useFactory
 
-可以动态创建provider，如果需要将provider的值基于各种其他依赖项，值等。
+可以动态创建 provider，如果需要将 provider 的值基于各种其他依赖项，值等。
 
-返回值会被provider使用为token
+返回值会被 provider 使用为 token
 
 ```typescript
  { provide: COFFEE_BRANDS, useFactory: () => ['Philips', 'Bosch'] }
@@ -969,17 +870,15 @@ export class CoffeeBrandsFactory {
 },
 ```
 
-
-
 #### 异步
 
 比如：在我们的数据库建立连接之前，我们不想开始接受请求
 
-useFactory可以返回一个Promise，允许它等待异步任务
+useFactory 可以返回一个 Promise，允许它等待异步任务
 
-在Nest实例化任何一个依赖与该provider的类之前，Nest会等promise resolve，再使用COFFEE_BRANDS
+在 Nest 实例化任何一个依赖与该 provider 的类之前，Nest 会等 promise resolve，再使用 COFFEE_BRANDS
 
-> 假设此provider的数据必须从数据库中异步查询，然后才能在任何地方使用
+> 假设此 provider 的数据必须从数据库中异步查询，然后才能在任何地方使用
 
 ```typescript
 {
@@ -996,11 +895,9 @@ useFactory可以返回一个Promise，允许它等待异步任务
 },
 ```
 
-
-
 ## 动态模块
 
-到此都是静态模块，静态模块不能让provider使用配置
+到此都是静态模块，静态模块不能让 provider 使用配置
 
 :chestnut:
 
@@ -1048,15 +945,13 @@ imports: [
 ],
 ```
 
+## Provider 的域
 
+@Injection 的 scope 机制可以获取 provider 的生命周期行为
 
-## Provider的域
+默认情况，每个 provider 都是一个单例 Singelton
 
-@Injection的scope机制可以获取provider的生命周期行为
-
-默认情况，每个provider都是一个单例Singelton
-
-比如：在CoffeesService中使用@Injectable时，实际上是一种速记实现，用于将其传递给具有scope和Scope.DEFAULT的对象
+比如：在 CoffeesService 中使用@Injectable 时，实际上是一种速记实现，用于将其传递给具有 scope 和 Scope.DEFAULT 的对象
 
 > @Injectable({ scope: Scope.DEFAULT })
 >
@@ -1064,11 +959,11 @@ imports: [
 >
 > 其他值：
 >
-> Scope.TRANSIENT  -  瞬态
+> Scope.TRANSIENT - 瞬态
 >
-> Scope.REQUEST-  只会在每次请求时创建一个新的实例，请求完成后，进行垃圾回收
+> Scope.REQUEST- 只会在每次请求时创建一个新的实例，请求完成后，进行垃圾回收
 
-### 指定provider的域
+### 指定 provider 的域
 
 ```typescript
 {
@@ -1077,21 +972,19 @@ imports: [
 },
 ```
 
-Nest会使注入链向上冒泡，如果controllers依赖于了scope是Scope.REQUEST的service，它也隐式地变为REQUEST范围。
-
-
+Nest 会使注入链向上冒泡，如果 controllers 依赖于了 scope 是 Scope.REQUEST 的 service，它也隐式地变为 REQUEST 范围。
 
 ## 配置
 
-ConfigModule：从默认位置（根目录）加载.env文件，并将env中的键值对与`process.env`的环境变量合并存储在私有结构中，可以用ConfigService类在app的任意位置访问
+ConfigModule：从默认位置（根目录）加载.env 文件，并将 env 中的键值对与`process.env`的环境变量合并存储在私有结构中，可以用 ConfigService 类在 app 的任意位置访问
 
-> nodejs程序中常使用env设置秘钥，数据库选项，密码等，来自process.env默认的值都是string
+> nodejs 程序中常使用 env 设置秘钥，数据库选项，密码等，来自 process.env 默认的值都是 string
 
 ```bash
 npm install @nestjs/config
 ```
 
-配置env
+配置 env
 
 ```bash
 DATABASE_USER=postgres
@@ -1101,7 +994,7 @@ DATABASE_PORT=5432
 DATABASE_HOST=xxx
 ```
 
-使用env
+使用 env
 
 ```typescript
 TypeOrmModule.forRoot({
@@ -1116,32 +1009,25 @@ TypeOrmModule.forRoot({
 }),
 ```
 
-
-
-### 自定义env路径
+### 自定义 env 路径
 
 如果再多个文件中找到相同的变量，以第一个为准
 
 ```typescript
 ConfigModule.forRoot({
-    envFilePath: '.env',
-})
-
+  envFilePath: ".env",
+});
 ```
 
-
-
-### 禁用env
+### 禁用 env
 
 ```typescript
-ignoreEnvFile: true
+ignoreEnvFile: true;
 ```
-
-
 
 ### 校验环境变量
 
-使用joi包
+使用 joi 包
 
 https://joi.dev/api/
 
@@ -1160,14 +1046,12 @@ npm i --save-dev @types/joi
 
 ```typescript
 ConfigModule.forRoot({
-    validationSchema: Joi.object({
-        DATABASE_HOST: Joi.required(),
-        DATABASE_PORT: Joi.number().default(5432),
-    }),
-})
+  validationSchema: Joi.object({
+    DATABASE_HOST: Joi.required(),
+    DATABASE_PORT: Joi.number().default(5432),
+  }),
+});
 ```
-
-
 
 ### ConfigService
 
@@ -1195,13 +1079,9 @@ this.configService.get<string>('DATABASE_HOST');
 
 ```
 
-
-
-
-
 ### 自定义配置文件
 
-可以根据业务的scope来进行分组配置
+可以根据业务的 scope 来进行分组配置
 
 将相关配置存储在单个文件中，独立管理
 
@@ -1209,59 +1089,53 @@ this.configService.get<string>('DATABASE_HOST');
 // 创建文件 src/config/app.config.ts 用来管理全局配置
 
 export default () => ({
-  environment: process.env.NODE_ENV || 'development',
+  environment: process.env.NODE_ENV || "development",
   database: {
-    host: process.env.DATABASE_HOST || 'localhost',
+    host: process.env.DATABASE_HOST || "localhost",
     port: parseInt(process.env.DATABASE_PORT) || 5432,
   },
 });
 
 // 引入：app.module中
-import appConfig from './config/app.config';
+import appConfig from "./config/app.config";
 ConfigModule.forRoot({
- 	load: [appConfig],
+  load: [appConfig],
 }),
-    
-// 使用：coffees.service 可以通过对象的方式来获取值
-this.configService.get('database.host');
+  // 使用：coffees.service 可以通过对象的方式来获取值
+  this.configService.get("database.host");
 ```
-
-
 
 ### 配置命名空间
 
-自定义文件通过ts的方式来定义配置，虽然方便，但是随着功能不断增加，配置文件中越来越多的配置键，使用非类型化的方式，不便于维护，且容易出错
+自定义文件通过 ts 的方式来定义配置，虽然方便，但是随着功能不断增加，配置文件中越来越多的配置键，使用非类型化的方式，不便于维护，且容易出错
 
 为防止这种情况，可以结合 配置命名空间 和 部分注册 来验证配置中的键
 
 ```typescript
 // src/coffees/config/coffees.config.ts
 
-import { registerAs } from '@nestjs/config';
+import { registerAs } from "@nestjs/config";
 
-export default registerAs('coffee', () => ({
-  foo: 'bar',
+export default registerAs("coffee", () => ({
+  foo: "bar",
 }));
-
 ```
 
 > registerAs()函数可以注册一个命名空间配置对象 - coffee(第一个参数)
 >
-> 使用forRoot在根模块中配置，但是难免要对个别模块进行单独配置，可以使用forFeature
+> 使用 forRoot 在根模块中配置，但是难免要对个别模块进行单独配置，可以使用 forFeature
 
 ```typescript
 // coffees.module - imports
-ConfigModule.forFeature(coffeesConfig)
+ConfigModule.forFeature(coffeesConfig);
 
 // service中使用，这样依旧是非类型化的
-this.configService.get('coffee.foo');
+this.configService.get("coffee.foo");
 ```
-
-
 
 :heart:**最佳方案**
 
-每个命名空间都暴露了一个KEY属性，可以使用KEY将整个对象注入到在Nest注册的任何类，我们可以在类中直接访问这个对象，而不是通过get方法
+每个命名空间都暴露了一个 KEY 属性，可以使用 KEY 将整个对象注入到在 Nest 注册的任何类，我们可以在类中直接访问这个对象，而不是通过 get 方法
 
 ```typescript
 @Inject(coffeesConfig.KEY)
@@ -1270,13 +1144,9 @@ private readonly coffeesConfiguration: ConfigType<typeof coffeesConfig>
 console.log(coffeesConfiguration.foo);
 ```
 
-
-
-
-
 ### 异步配置
 
-如果在app.module中将TypeOrmModule放在ConfigModule之前，会连接不上数据库，因为在配置数据库之后才初始化了env，这样会报错
+如果在 app.module 中将 TypeOrmModule 放在 ConfigModule 之前，会连接不上数据库，因为在配置数据库之后才初始化了 env，这样会报错
 
 解决方法：使用`forRootAsync`
 
@@ -1294,34 +1164,3 @@ TypeOrmModule.forRootAsync({
       }),
 }),
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
