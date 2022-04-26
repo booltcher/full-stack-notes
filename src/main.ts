@@ -1,17 +1,11 @@
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { ApiKeyGuard } from './common/gurads/api-key.guard';
-import { WrapResponseInterceptor } from './common/interceptors/wrap-response.interceptor';
-import { TimeoutInterceptor } from './common/interceptors/timeout.interceptor';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.useGlobalInterceptors(
-    new WrapResponseInterceptor(),
-    new TimeoutInterceptor(),
-  );
+  app.useGlobalInterceptors();
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
