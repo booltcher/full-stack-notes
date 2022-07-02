@@ -1,3 +1,9 @@
+### Font
+
+Consolas, 'Courier New', monospace
+
+
+
 ### Enhance
 
 - auto close tag
