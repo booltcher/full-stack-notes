@@ -1,4 +1,57 @@
-
+- [NodeJS 生态现状](#nodejs-生态现状)
+- [初识 NestJS](#初识-nestjs)
+- [开始](#开始)
+  - [结构](#结构)
+  - [装饰器](#装饰器)
+- [控制器](#控制器)
+  - [自动生成](#自动生成)
+  - [指定路由](#指定路由)
+  - [全局路由前缀](#全局路由前缀)
+  - [处理请求](#处理请求)
+  - [嵌套 URL](#嵌套-url)
+  - [动态数据](#动态数据)
+  - [查询参数](#查询参数)
+  - [Payload](#payload)
+  - [静态状态码](#静态状态码)
+  - [使用底层库方法](#使用底层库方法)
+  - [修改和删除](#修改和删除)
+- [服务](#服务)
+  - [错误处理](#错误处理)
+- [模块](#模块)
+- [DTO](#dto)
+  - [输入验证](#输入验证)
+  - [简化 Dto 代码](#简化-dto-代码)
+  - [ValidationPipe 其他功能](#validationpipe-其他功能)
+    - [**白名单**](#白名单)
+    - [Transform](#transform)
+- [数据库](#数据库)
+  - [初始化](#初始化)
+  - [TypeORM](#typeorm)
+    - [**注册 TypeORM**](#注册-typeorm)
+      - [**Repository**](#repository)
+  - [关系](#关系)
+  - [分页](#分页)
+  - [事务](#事务)
+  - [索引](#索引)
+- [依赖注入](#依赖注入)
+- [封装](#封装)
+- [自定义](#自定义)
+  - [useValue](#usevalue)
+  - [Provider token](#provider-token)
+  - [useClass](#useclass)
+  - [useFactory](#usefactory)
+    - [异步](#异步)
+- [动态模块](#动态模块)
+- [Provider 的域](#provider-的域)
+  - [指定 provider 的域](#指定-provider-的域)
+- [配置](#配置)
+  - [自定义 env 路径](#自定义-env-路径)
+  - [禁用 env](#禁用-env)
+  - [校验环境变量](#校验环境变量)
+  - [ConfigService](#configservice)
+  - [自定义配置文件](#自定义配置文件)
+  - [配置命名空间](#配置命名空间)
+  - [异步配置](#异步配置)
 
 ## NodeJS 生态现状
 
@@ -44,6 +97,7 @@ nest new projectName
 cd projectName
 
 npm run start
+npm run start:dev //热更新
 
 ```
 
@@ -96,6 +150,12 @@ nest g co module/abc --dry-run
 
 ```typescript
 @Controller('/test')
+```
+
+### 全局路由前缀
+在`main.ts`中加上`app.setGlobalPrefix()`：
+```typescript
+app.setGlobalPrefix('nest-app'); // 全局路由前缀
 ```
 
 ### 处理请求
