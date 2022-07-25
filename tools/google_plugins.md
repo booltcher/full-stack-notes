@@ -1,7 +1,5 @@
 chrome://extensions/shortcuts
 
-
-
 1. itab
 2. lastpass
 3. Checker Plus for Gmail
@@ -24,3 +22,4 @@ chrome://extensions/shortcuts
 20. Saladict - 划词翻译
 21. grammarly
 22. 知乎免登录
+23. Duplicate Tab Shortcut
